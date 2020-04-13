@@ -13,7 +13,8 @@ const pubsub = new PubSub();
 const server = new GraphQLServer({
     typeDefs,
     resolvers,
-    context: { pubsub } });
+    context: { pubsub }
+});
 
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -22,5 +23,5 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 mongoose.connection.once("open", () =>
-    server.start({ port: process.env.PORT },() => console.log("Running at localhost:4400"))
+    server.start({ port: process.env.PORT },() => console.log(`Running at localhost:${process.env.PORT}`))
 );
