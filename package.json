@@ -2,9 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node app.js"
   },
   "keywords": [],
   "author": "",
@@ -18,9 +19,13 @@
   "dependencies": {
     "bcrypt": "^4.0.1",
     "dotenv": "^8.2.0",
+    "graphql": "^15.0.0",
+    "graphql-import": "^1.0.2",
     "graphql-resolvers": "^0.4.2",
+    "graphql-subscriptions": "^1.1.0",
     "graphql-yoga": "^1.18.3",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.7"
+    "mongoose": "^5.9.7",
+    "subscriptions-transport-ws": "^0.9.16"
   }
 }
