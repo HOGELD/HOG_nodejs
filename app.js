@@ -1,20 +1,24 @@
 import { PubSub, GraphQLServer} from "graphql-yoga";
-import { importSchema} from "graphql-import";
-import jwt from 'jsonwebtoken';
 import  mongoose  from 'mongoose';
 import  dotenv from 'dotenv';
-import resolvers from './graphql/resolvers';
 
-const typeDefs = importSchema('graphql/schema/schema.graphql');
-
+const resolvers = require('./graphql/resolvers/index');
 dotenv.config();
 
 const pubsub = new PubSub();
 const server = new GraphQLServer({
-    typeDefs,
+    typeDefs: 'graphql/schema/schema.graphql',
     resolvers,
     context: { pubsub }
 });
+
+const options = {
+    port: process.env.PORT,
+    endpoint: '/graphql',
+    subscriptions: `/subscriptions`,
+    playground: '/playground',
+    introspection:true
+}
 
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -23,5 +27,5 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 mongoose.connection.once("open", () =>
-    server.start({ port: process.env.PORT },() => console.log(`Running at localhost:${process.env.PORT}`))
+    server.start(options,() => console.log(`Running at localhost:${process.env.PORT}`))
 );

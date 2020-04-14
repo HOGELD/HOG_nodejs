@@ -1,18 +1,27 @@
-type User {
-    id: ID!
-    email: String!
-}
+     type User {
+            id: ID!
+            email: String!
+            password: String
+        }
 
-type Token {
-    token: String!
-}
+        type Token {
+            token: String!
+            userId: ID!
+            tokenExpiration: Int!
+        }
 
-type Query {
-    signIn(email: String!, password: String!): Token!
-    getUser(id: ID!): User!
-    me: User!
-}
+        input UserInput {
+            email: String!
+            password: String!
+        }
 
-type Mutation {
-    signUp(email: String!, password: String!): Token
-}
+        type Query {
+            login(email: String!, password: String!): Token!
+            getUser(id: ID!): User!
+            me: User!
+            hello: String!
+        }
+
+        type Mutation {
+            createUser(email: String!, password: String): User
+        }
