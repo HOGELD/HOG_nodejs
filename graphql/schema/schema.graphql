@@ -1,7 +1,30 @@
      type User {
-            id: ID!
+            _id: ID!
             email: String!
-            password: String
+            password: String!
+            firstname: String!
+            lastname: String!
+            phone: String!
+            gender: String!
+            image: String
+            isAdmin: Boolean
+            role: String
+            team: String
+            group: String
+        }
+
+        type Events {
+            _id: ID!
+            title: String!
+            description: String!
+            date: String!
+            creator: User!
+        }
+
+        type MemberShip {
+          _id: ID!
+          status: String!
+          date: String!
         }
 
         type Token {
@@ -12,8 +35,14 @@
 
         input UserInput {
             email: String!
-            password: String!
+            password: String
         }
+
+        input EventInput {
+           title: String!
+           description: String!
+           date: String!
+       }
 
         type Query {
             login(email: String!, password: String!): Token!
@@ -23,5 +52,5 @@
         }
 
         type Mutation {
-            createUser(email: String!, password: String): User
+            createUser(userInput: UserInput): User
         }

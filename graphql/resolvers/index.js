@@ -4,5 +4,4 @@ const rootResolver = {
   ...authResolver
 };
 
-
 module.exports = rootResolver;
